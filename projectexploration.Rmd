@@ -1,0 +1,290 @@
+---
+title: "Project Exploration"
+author: "Dylan Toothaker & Ravi Patel"
+date: "4/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(ggpubr)
+```
+
+```{r, read}
+# Load in data frames:
+
+## California
+df.ca.losangeles <- read.csv("./California/CAlosangeles.csv")
+df.ca.oakland <- read.csv("./California/CAoakland.csv")
+df.ca.pacificgrove <- read.csv("./California/CApacificgrove.csv")
+df.ca.sandiego <- read.csv("./California/CAsandiego.csv")
+df.ca.sanfrancisco <- read.csv("./California/CAsanfrancisco.csv")
+df.ca.sanmateocounty <- read.csv("./California/CAsanmateocounty.csv")
+df.ca.santaclaracounty <- read.csv("./California/CAsantaclaracounty.csv")
+df.ca.santacruzcounty <- read.csv("./California/CAsantacruzcounty.csv")
+## Colorado
+df.co.denver <- read.csv("./Colorado/COdenver.csv")
+## Washington DC
+df.DC <- read.csv("./DC/DC.csv")
+## Florida
+df.fl.browardcounty <- read.csv("./Florida/FLbrowardcounty.csv")
+## Hawaii
+df.HI <- read.csv("./Hawaii/HI.csv")
+## Illinois
+df.il.chicago <- read.csv("./Illinois/ILchicago.csv")
+## Louisiana
+df.la.neworleans <- read.csv("./Louisiana/LAneworleans.csv")
+## Massachusetts
+df.ma.boston <- read.csv("./Massachusetts/MAboston.csv")
+df.ma.cambridge <- read.csv("./Massachusetts/MAcambridge.csv")
+## Minnesota
+df.mn.twincities <- read.csv("./Minnnesota/MNtwincities.csv")
+## Nevada
+df.nv.clarkcounty <- read.csv("./Nevada/NVclarkcounty.csv")
+## New Jersey
+df.nj.jerseycity <- read.csv("./NewJersey/NJjerseycity.csv")
+## New York
+df.ny.newyorkcity <- read.csv("./NewYork/NYnewyorkcity.csv")
+## North Carolina
+df.nc.asheville <- read.csv("./NorthCarolina/NCasheville.csv")
+## Ohio
+df.oh.columbus <- read.csv("./Ohio/OHcolumbus.csv")
+## Oregon
+df.or.portland <- read.csv("./Oregon/ORportland.csv")
+df.or.salem <- read.csv("./Oregon/ORsalem.csv")
+## Rhode Island
+df.RI <- read.csv("./RhodeIsland/RI.csv")
+## Tennessee
+df.tn.nashville <- read.csv("./Tennessee/TNnashville.csv")
+## Texas
+df.tx.austin <- read.csv("./Texas/TXaustin.csv")
+df.tx.dallas <- read.csv("./Texas/TXdalas.csv")
+## Washington
+df.wa.seattle <- read.csv("./Washington/WAseattle.csv")
+```
+
+```{r, modify}
+## California 
+df.ca.losangeles[,17] <- "California"
+names(df.ca.losangeles)[17] <- "State"
+df.ca.losangeles[,18] <- "Los Angeles"
+names(df.ca.losangeles)[18] <- "Area"
+
+df.ca.oakland[,17] <- "California"
+names(df.ca.oakland)[17] <- "State"
+df.ca.oakland[,18] <- "Oakland"
+names(df.ca.oakland)[18] <- "Area"
+
+df.ca.pacificgrove[,17] <- "California"
+names(df.ca.pacificgrove)[17] <- "State"
+df.ca.pacificgrove[,18] <- "Pacific Grove"
+names(df.ca.pacificgrove)[18] <- "Area"
+
+df.ca.sandiego[,17] <- "California"
+names(df.ca.sandiego)[17] <- "State"
+df.ca.sandiego[,18] <- "San Diego"
+names(df.ca.sandiego)[18] <- "Area"
+
+df.ca.sanfrancisco[,17] <- "California"
+names(df.ca.sanfrancisco)[17] <- "State"
+df.ca.sanfrancisco[,18] <- "San Francisco"
+names(df.ca.sanfrancisco)[18] <- "Area"
+
+df.ca.sanmateocounty[,17] <- "California"
+names(df.ca.sanmateocounty)[17] <- "State"
+df.ca.sanmateocounty[,18] <- "San Mateo County"
+names(df.ca.sanmateocounty)[18] <- "Area"
+
+
+df.ca.santaclaracounty[,17] <- "California"
+names(df.ca.santaclaracounty)[17] <- "State"
+df.ca.santaclaracounty[,18] <- "Santa Clara County"
+names(df.ca.santaclaracounty)[18] <- "Area"
+
+df.ca.santacruzcounty[,17] <- "California"
+names(df.ca.santacruzcounty)[17] <- "State"
+df.ca.santacruzcounty[,18] <- "Santa Cruz County"
+names(df.ca.santacruzcounty)[18] <- "Area"
+
+## Colorado
+df.co.denver[,17] <- "Colorado"
+names(df.co.denver)[17] <- "State"
+df.co.denver[,18] <- "Denver"
+names(df.co.denver)[18] <- "Area"
+## Washington DC
+df.DC[,17] <- "DC"
+names(df.DC)[17] <- "State"
+df.DC[,18] <- "DC"
+names(df.DC)[18] <- "Area"
+## Florida
+df.fl.browardcounty[,17] <- "Florida"
+names(df.fl.browardcounty)[17] <- "State"
+df.fl.browardcounty[,18] <- "Broward County"
+names(df.fl.browardcounty)[18] <- "Area"
+## Hawaii
+df.HI[,17] <- "Hawaii"
+names(df.HI)[17] <- "State"
+df.HI[,18] <- "Hawaii"
+names(df.HI)[18] <- "Area"
+## Illinois
+df.il.chicago[,17] <- "Illinois"
+names(df.il.chicago)[17] <- "State"
+df.il.chicago[,18] <- "Chicago"
+names(df.il.chicago)[18] <- "Area"
+## Louisiana
+df.la.neworleans[,17] <- "Louisiana"
+names(df.la.neworleans)[17] <- "State"
+df.la.neworleans[,18] <- "New Orleans"
+names(df.la.neworleans)[18] <- "Area"
+## Massachusetts
+df.ma.boston[,17] <- "Massachusetts"
+names(df.ma.boston)[17] <- "State"
+df.ma.boston[,18] <- "Boston"
+names(df.ma.boston)[18] <- "Area"
+
+df.ma.cambridge[,17] <- "Massachusetts"
+names(df.ma.cambridge)[17] <- "State"
+df.ma.cambridge[,18] <- "Cambridge"
+names(df.ma.cambridge)[18] <- "Area"
+## Minnesota
+df.mn.twincities[,17] <- "Minnesota"
+names(df.mn.twincities)[17] <- "State"
+df.mn.twincities[,18] <- "Twin Cities"
+names(df.mn.twincities)[18] <- "Area"
+## Nevada
+df.nv.clarkcounty[,17] <- "Nevada"
+names(df.nv.clarkcounty)[17] <- "State"
+df.nv.clarkcounty[,18] <- "Clark County"
+names(df.nv.clarkcounty)[18] <- "Area"
+## New Jersey
+df.nj.jerseycity[,17] <- "New Jersey"
+names(df.nj.jerseycity)[17] <- "State"
+df.nj.jerseycity[,18] <- "Jersey City"
+names(df.nj.jerseycity)[18] <- "Area"
+## New York
+df.ny.newyorkcity[,17] <- "New York"
+names(df.ny.newyorkcity)[17] <- "State"
+df.ny.newyorkcity[,18] <- "New York City"
+names(df.ny.newyorkcity)[18] <- "Area"
+## North Carolina
+df.nc.asheville[,17] <- "North Carolina"
+names(df.nc.asheville)[17] <- "State"
+df.nc.asheville[,18] <- "Asheville"
+names(df.nc.asheville)[18] <- "Area"
+## Ohio
+df.oh.columbus[,17] <- "Ohio"
+names(df.oh.columbus)[17] <- "State"
+df.oh.columbus[,18] <- "Columbus"
+names(df.oh.columbus)[18] <- "Area"
+## Oregon
+df.or.portland[,17] <- "Oregon"
+names(df.or.portland)[17] <- "State"
+df.or.portland[,18] <- "Portland"
+names(df.or.portland)[18] <- "Area"
+
+df.or.salem[,17] <- "Oregon"
+names(df.or.salem)[17] <- "State"
+df.or.salem[,18] <- "Salem"
+names(df.or.salem)[18] <- "State"
+## Rhode Island
+df.RI[,17] <- "Rhode Island"
+names(df.RI)[17] <- "State"
+df.RI[,18] <- "Rhode Island"
+names(df.RI)[18] <- "Area"
+## Tennessee
+df.tn.nashville[,17] <- "Tennessee"
+names(df.tn.nashville)[17] <- "State"
+df.tn.nashville[,18] <- "Nashville"
+names(df.tn.nashville)[18] <- "Area"
+## Texas
+df.tx.austin[,17] <- "Texas"
+names(df.tx.austin)[17] <- "State"
+df.tx.austin[,18] <- "Austin"
+names(df.tx.austin)[18] <- "Area"
+
+df.tx.dallas[,17] <- "Texas"
+names(df.tx.dallas)[17] <- "State"
+df.tx.dallas[,18] <- "Dallas"
+names(df.tx.dallas)[18] <- "Area"
+## Washington
+df.wa.seattle[,17] <- "Washington"
+names(df.wa.seattle)[17] <- "State"
+df.wa.seattle[,18] <- "Seattle"
+names(df.wa.seattle)[18] <- "Area"
+## Create whole US 
+df <- rbind(df.ca.losangeles, df.ca.oakland, df.ca.pacificgrove, df.ca.sandiego, df.ca.sanfrancisco, df.ca.sanmateocounty, df.ca.santaclaracounty, df.ca.santacruzcounty,
+             df.co.denver,
+             df.DC,
+             df.fl.browardcounty,
+             df.HI,
+             df.il.chicago,
+             df.la.neworleans,
+             df.ma.boston, df.ma.cambridge,
+             df.mn.twincities,
+             df.nv.clarkcounty,
+             df.nj.jerseycity,
+             df.ny.newyorkcity,
+             df.nc.asheville,
+             df.oh.columbus,
+             df.or.portland,
+             df.RI,
+             df.tn.nashville,
+             df.tx.austin, df.tx.dallas,
+             df.wa.seattle)
+
+df$name <- as.factor(df$name)
+df$host_id <- as.factor(df$host_id)
+df$host_name <- as.factor(df$host_name)
+df$neighbourhood <- as.factor(df$neighbourhood)
+df$neighbourhood_group <- as.factor(df$neighbourhood_group)
+df$room_type <- as.factor(df$room_type)
+df$State <- as.factor(df$State)
+df$Area <- as.factor(df$Area)
+
+```
+
+```{r, plots}
+ggplot(na.omit(df), aes(y = price, x = Area)) + geom_point()
+```
+
+
+
+
+Plot 7: Here we make a graph of all the Midwestern states in our dataset. Within the graphs, we inspect 4 types of Airbnb's and their price in relation to which Midwestern state it lies in, along with the availability of the Airbnb's. We can see that the most common type of Airbnb is entire homes/apartments. This could be due to people wanting to maintain their privacy. The most popular state in Airbnb's out of all the Midwest states is Minnesota. We can also see that most people who rent airbnb's in the Midwest spend from 0-$2500.
+
+```{r}
+#Midwest
+df.Midwest <- subset(df, State == "Illinois" | State == "Minnesota" | State == "Ohio")
+ggplot(df.Midwest, aes(x = State, y = price, color = availability_365)) + geom_point(alpha = .5) + geom_jitter()+ facet_wrap(.~room_type) + theme(axis.text.x = element_text(angle = 45, face = "bold", hjust = 1, size = 9), legend.position = "left") 
+```
+
+Plot 8: Next we make a graph of all the Northeastern states. Here we can see that in New York it's more common to rent out pricier homes/apartments in comparison to the other states. And even though that might be true, there seems to be less available hotel rooms or private rooms rather than entire homes. This may be because when people visit New York they don't really go for a homey trip but rather look forward to city experience, and look for a place to stay either close to the city or in the city. In Massachusetts it looks like the opposite where people prefer entire homes over a hotel room or private room. Rhode Island is in between because there is a low availability of rooms that cost less than around $1200 for either entire homes or private rooms, and it seems like there is also a decently low availability of hotel rooms. There don't seem to be as many Airbnb's in general in comparison with the other states, and it doesn't look like it is a place where many people go to travel. We can also see that 
+```{r}
+#Northeast
+df.Northeast <- subset(df, State == "Massachusetts" | State == "New Jersey" | State == "New York" | State == "Rhode Island")
+ggplot(df.Northeast, aes(x = State, y = price, color = availability_365)) + geom_point(alpha = .5) + geom_jitter()+ facet_wrap(.~room_type) + theme(axis.text.x = element_text(angle = 45, face = "bold", hjust = 1, size = 9), legend.position = "left")
+```
+
+Plot 9: Here we make a graph of all the Western states in our dataframe, and we can see that California is the most visited place, along with the most priciest place. There isn't a distinct room type people in california try to rent, but if people are spending a lot money, such as anything above $12500, it is likely they will rent out either an entire home/apt or a private room. The most common room in that is rented in Colorado is either a private room for an entire home/apt. In Nevada people are likely to rent out a private room or a hotel room, and in Oregon people want either an entire home/apt. Surprisingly in Washington people are likely to rent either shared rooms or entire homes/apts. Also excluding California, when people rent out airbnb's they mostly spend from about 0 - 2500 dollars.
+```{r}
+#West
+df.West <- subset(df, State == "California" | State == "Colorado" | State == "Nevada" | State == "Oregon" | State == "Washington")
+ggplot(df.West, aes(x = State, y = price, color = availability_365)) + geom_point(alpha = .5) + geom_jitter()+ facet_wrap(.~room_type) + theme(axis.text.x = element_text(angle = 45, face = "bold", hjust = 1, size = 9), legend.position = "left")
+```
+
+Plot 10: When we look at the states in the south, we can see that people prefer to rent out entire homes/apt's, and when renting out these homes/apts people are willing to spend about 0-5k for DC, Florida, Texas, and Tennesse, and in North Carolina and Lousiana people spend about 2k less. When looking at the rest of the room types, it seems like there seems to be an equal distribution for all states, except we can see how people in Lousiana prefer Hotel rooms or Private rooms and people in North Carolina like shared rooms. When people are looking to rent out a hotel room, private room, or shared room in the South they are willing to spend about 0-3k.
+
+```{r}
+#South
+df.South <- subset(df, State == "DC" | State == "Florida" | State == "Louisiana" | State == "North Carolina" | State == "Tennessee" | State == "Texas")
+ggplot(df.South, aes(x = State, y = price, color = availability_365)) + geom_point(alpha = .5) + geom_jitter() + facet_wrap(.~room_type) + theme(axis.text.x = element_text(angle = 45, face = "bold", hjust = 1, size = 9), legend.position = "left")
+```
+
+
+
+
+
+
+
